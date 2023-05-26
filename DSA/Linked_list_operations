@@ -1,36 +1,115 @@
-//Linked list with a last node pointer:
+//LLWLNP = Linked list with a last node pointer AKA tail pointer:
 
 //Inserting a node in the beginning of LLWLNP
 
-void insert_beg(int first, int number) {
+
+void insert_beg(int head, int tail, int number) {
     final newblock = allocate_memory(2);
     Mem[newblock] = number;
-    Mem[newblock+1] = Mem[first];
-    Mem[first] = newblock;
+    Mem[newblock+1] = Mem[head];
+
+    Mem[head] = newblock;
+
+    // Update tail pointer if the list was empty
+    if (Mem[tail] == null) {
+        Mem[tail] = newblock;
+    }
 }
 
 //Delete beginning of LLWLNP
 
-void delete_beg(int first) {
-    if (Mem[first] = null) {
+void delete_beg(int head, int tail) {
+    if (Mem[head] == null) {
         throw Exception; 
     }
-    final FirstNode = Mem[first];
-    final Mem[first] = Mem[FirstNode+1];
+
+    final FirstNode = Mem[head];
+    Mem[head] = Mem[FirstNode+1];
+    
+    // If the list only has one node, the head and tail would have pointed to the same node.
+    // After deletion, they should both be null.
+    if (head == tail) {
+        Mem[tail] = Mem[FirstNode+1];
+    }
+
+
     free_memory(FirstNode, 2);
+    
 }
 
-//Insert at end of LLWLNP
 
-void insert_end(int last, int number) {
-    
+
+// //Insert at end of LLWLNP
+
+
+void insert_end(int head, int tail, int number) {
     final newblock = allocate_memory(2);
     Mem[newblock] = number;
-    Mem[newblock+1] = null;
+    Mem[newblock + 1] = null;
 
-    final finalBlockAddress = Mem[last]
-    Mem[finalBlockAddress+1] = newblock;
+    // If list is empty
+    if (Mem[head] == null && Mem[tail] == null) {
+        Mem[head] = newblock;
+        Mem[tail] = newblock;
+        return;
+    }
 
-    Mem[last] = newblock;
+    // Find the current last node and update its next pointer
+    int lastNodeAddress = Mem[tail];
+    Mem[lastNodeAddress + 1] = newblock;
 
+    // Update tail pointer
+    Mem[tail] = newblock;
 }
+
+
+
+
+
+//Delete at end of LLWLNP
+
+void delete_end(int head, int tail) {
+    // Case if Empty list
+    if (Mem[head] == null) {
+        throw Exception;
+    }
+
+    // Case of one-noded list
+    if (Mem[head] == Mem[tail]) {
+        int singleNode = Mem[head];
+        free_memory(singleNode, 2);
+        Mem[head] = null;
+        Mem[tail] = null;
+        return;
+    }
+
+    int tmp = head;
+
+    while (Mem[Mem[tmp] + 1] != Mem[tail]) {
+        tmp = Mem[Mem[tmp] + 1];
+    }
+
+    Mem[tmp + 1] = null;
+
+    final lastnode = Mem[tail];
+    free_memory(lastnode, 2);
+
+    // Update tail pointer to the second last node
+    Mem[tail] = tmp;
+}
+
+
+
+
+
+
+
+// final head = allocate_memory(2);
+// final int tail = head + 1;
+// Mem[head] = null;
+// Mem[tail] = null;
+
+// insert_end(head,tail,93);
+// insert_end(head,tail,23);
+// insert_end(head,tail,12);
+// insert_end(head,tail,53);
