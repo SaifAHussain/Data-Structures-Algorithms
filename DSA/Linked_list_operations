@@ -22,4 +22,15 @@ void delete_beg(int first) {
 
 //Insert at end of LLWLNP
 
-void inset_end(int last, )
+void insert_end(int last, int number) {
+    
+    final newblock = allocate_memory(2);
+    Mem[newblock] = number;
+    Mem[newblock+1] = null;
+
+    final finalBlockAddress = Mem[last]
+    Mem[finalBlockAddress+1] = newblock;
+
+    Mem[last] = newblock;
+
+}
