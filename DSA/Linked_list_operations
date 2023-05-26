@@ -1,0 +1,25 @@
+//Linked list with a last node pointer:
+
+//Inserting a node in the beginning of LLWLNP
+
+void insert_beg(int first, int number) {
+    final newblock = allocate_memory(2);
+    Mem[newblock] = number;
+    Mem[newblock+1] = Mem[first];
+    Mem[first] = newblock;
+}
+
+//Delete beginning of LLWLNP
+
+void delete_beg(int first) {
+    if (Mem[first] = null) {
+        throw Exception; 
+    }
+    final FirstNode = Mem[first];
+    final Mem[first] = Mem[FirstNode+1];
+    free_memory(FirstNode, 2);
+}
+
+//Insert at end of LLWLNP
+
+void inset_end(int last, )
