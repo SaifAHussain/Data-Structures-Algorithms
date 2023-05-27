@@ -1,0 +1,83 @@
+//Constructors:
+
+EmptyList: returns an empty list
+MakeList(element,list): adds an element at the front of a list
+
+//Accessors
+
+first(list): returns the first element of the list
+rest(list): returns the list excluding the first element
+isEmpty(list): reports whether the list is empty
+
+
+
+//Operation: Last Element - recursively
+
+last(list) {
+    if (isEmpty(list)) {
+        error("Error: Empty_List_In_Last");
+    } elseif (isEmpty(rest(list))) {
+        return first(list);
+    } else {
+        return last(rest(list));
+    }
+}
+
+//Breakdown of what happens using the last() operation:
+
+last([1, 2, 3]):
+    last([2, 3]); // Because the rest of [1, 2, 3] is [2, 3]
+    last([3]); // Because the rest of [2, 3] is [3]
+    return first([3]); // Because the rest of [3] is [], so it returns the first element of [3] which is 3
+
+
+//Operation: Get Element By Index - recursively
+//What we are doing here is shrinking the list until it just has one element
+
+getElementByIndex(index, list) {
+    if (index < 0 or isEmpty(list)) {
+        error("Error: Empty_List");
+    } elseif (index == 0) {
+        return first(list);
+    } else {
+        return getElementByIndex(index-1, rest(last));
+    }
+}
+
+//Breakdown of what happens using the getElemenyByIndex() operation:
+
+getElementByIndex(2, [1, 2, 3, 4]):
+    getElementByIndex(1, [2, 3, 4]); // Because the index is not 0, it subtracts 1 from the index and calls the function on the rest of the list
+    getElementByIndex(0, [3, 4]); // Same as before, subtracts 1 from the index and calls the function on the rest of the list
+    return first([3, 4]); // Because the index is now 0, it returns the first element of the list
+
+
+
+//Operation: append one list to another list to create one list
+
+append(list1, list2) {
+    if (isEmpty(list1)) {
+        return list2;
+    } else {
+        return MakeList(first(list1), append(rest(list1), list2));
+    }
+}
+
+//Breakdown of how the append operation works recursively:
+
+list1=[a,b,c];
+list2=[d,e];
+
+append([a,b,c], [d,e]):
+    MakeList(a,append([b,c], [d,e]));
+    MakeList(a,MakeList(b,append([c], [d,e])));
+    MakeList(a,MakeList(b,MakeList(c,append([], [d,e]))));
+    MakeList(a,MakeList(b,MakeList(c,[d,e])));
+    MakeList(a,MakeList(b,[c,d,e]));
+    MakeList(a,[b,c,d,e])
+
+list2 = [a,b,c,d,e]; 
+
+
+
+
