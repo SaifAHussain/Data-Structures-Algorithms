@@ -1,0 +1,31 @@
+//Constructors:
+
+EmptyStack: returns an empty stack
+push(element,stack): pushes element on top of given stack
+
+//Accessors
+
+top(stack): returns the value at the top of the stack without changing the stack
+pop(stack): returns the stack with the top element removed
+isEmpty(stack): reports whether the stack is empty
+
+//Implementing Stacks as Linked Lists:
+//We would place the top of our stack at the beginning of our linked list to ensure we can do operations in constant time
+
+pop(stack) = delete_beg(list);
+push(stack) = insert_beg(list);
+
+
+//Implementing Stacks are Arrays:
+//Here the bottom of the stack is stored on position 0 of the array
+//and the top of the stack in position stack_size-1 We can
+//implement push and pop for this representation in constant
+
+stack = new int[MAXSTACK]; //initializing empty array
+stack_size = 0;
+
+push(x) = {
+    stack[stack_size] = x;
+
+}
+
