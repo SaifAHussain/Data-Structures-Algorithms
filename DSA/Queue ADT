@@ -1,0 +1,22 @@
+//Constructors
+EmptyQueue: returns an empty queue
+push(element, queue) : Also known as enqueue(x), puts value x at the rear of the queue
+
+
+//Accessors
+top(queue): Also known as front(queue), returns the value at front of queue without changing the queue
+pop(queue): Also known as dequeue(queue), returns the queue with the front element removed
+//if there are no values in the queue, it raises:
+EmptyQueueException
+
+isEmpty(queue): says whether the queue is empty
+
+//implementing as a LLWLNP
+
+pop(queue) = delete_beg();
+push(queue) = insert_end();
+
+
+
+
+

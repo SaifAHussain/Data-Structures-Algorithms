@@ -16,16 +16,21 @@ pop(stack) = delete_beg(list);
 push(stack) = insert_beg(list);
 
 
-//Implementing Stacks are Arrays:
+//Implementing Stacks as Arrays:
 //Here the bottom of the stack is stored on position 0 of the array
 //and the top of the stack in position stack_size-1 We can
-//implement push and pop for this representation in constant
+//implement push and pop for this representation in constant time
 
 stack = new int[MAXSTACK]; //initializing empty array
 stack_size = 0;
 
 push(x) = {
     stack[stack_size] = x;
+    stack_size ++;
+}
 
+pop() = {
+    stack_size--;
+    return stack[stack_size]; 
 }
 
