@@ -25,11 +25,19 @@ stack = new int[MAXSTACK]; //initializing empty array
 stack_size = 0;
 
 push(x) = {
+    if (stack_size == MAXSTACK) {
+        return error("Stack_Full")
+    }
+    
     stack[stack_size] = x;
     stack_size ++;
 }
 
 pop() = {
+    if (isEmpty(stack)) {
+        return error("Empty_Stack")
+    }
+
     stack_size--;
     return stack[stack_size]; 
 }

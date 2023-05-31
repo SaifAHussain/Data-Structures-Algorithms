@@ -14,7 +14,49 @@ isEmpty(queue): says whether the queue is empty
 //implementing as a LLWLNP
 
 pop(queue) = delete_beg();
-push(queue) = insert_end();
+push(x, queue) = insert_end();
+
+//implementing as an array
+
+queue = new int[MAXQUEUE];
+front = 0;
+size = 0; //When empty queue, front=rear
+rear = (front+size) % MAXQUEUE;
+
+top(queue): {
+    return queue[front];
+}
+
+boolean isEmpty(queue): {
+    size == 0;
+}
+
+boolean isFull(queue): {
+    size == MAXQUEUE;
+}
+
+
+
+push(x, queue): {
+    if isFull(queue) {
+        throwException("QueueFullException");    
+    }
+
+    queue[rear] = x;
+    size++;
+} 
+
+pop(queue): {
+    int val;
+    if isEmpty(queue) {
+        throwException("QueueEmptyException");    
+    }
+
+    val = queue[front];
+    front = (front + 1) % MAXQUEUE;
+    size--;
+    return val
+}
 
 
 
