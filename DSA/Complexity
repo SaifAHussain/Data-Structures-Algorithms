@@ -1,0 +1,36 @@
+int search (int[] array, int x) {
+    int n = array.length; // 1 step - initialisation
+    int i = 0;            // 1 step - initialisation
+
+    while (i < n) {       // 1 step - comparison  
+        if (array[i] == x) { // 1 step - comparison
+            return i;     // 1 step - return statement  
+        } else {
+            i++;          // 1 step - increment  
+        }
+    } 
+
+    return -1;            // 1 step - return statement  
+}
+
+
+
+//This is a recursive linear search of an array - It would only work properly if we put i = 0 as the argument,
+//so what we can do is put this recursive function inside another function which calls it with i=0 as argument
+
+int search_rec(int[] array, int i, int x) {
+
+    if (i == array.length) {                // 1 step - comparison
+        return -1                           // 1 step - return
+    }
+    
+    if (array[i] == x) {                    // 1 step - comparison
+        return i;                           // 1 step - return
+    } else {
+        i++;                                // 1 step - iteration
+        return search_rec(array, i, x);     // 1 step - return
+    }
+}
+
+
+
