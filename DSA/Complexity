@@ -34,3 +34,12 @@ int search_rec(int[] array, int i, int x) {
 
 
 
+int search_bin(int[] array, target) {
+
+
+    if (middle == target) {
+        return 
+    }
+
+
+}
