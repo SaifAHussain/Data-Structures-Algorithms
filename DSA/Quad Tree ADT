@@ -1,0 +1,35 @@
+//Constructors
+
+baseQT(v)
+//Returns a single leaf node quad tree with a value
+
+MakeQT(luqt, ruqt, llqt, rlqt)
+//Returns a quad tree built from 4 sub-quad trees
+
+
+
+//Accessors:
+
+isValue(qt)
+//Returns trie if qt is a value node quad tree, otherwise returns false 
+
+lu(qt)
+//Returns the left-upper sub-quad tree of qt
+
+ru(qt)
+//Returns the right-upper sub-quad tree of qt
+
+ll(qt)
+//Returns the left-lower sub-quad tree of qt
+
+rl(qt)
+//Returns the right-lower sub-quad tree of qt
+
+// ^ These all could be leaf nodes or internal nodes ^
+
+
+value(qt)
+//Returns the value stored in a leaf node, we will refer to the value as qt, rather than calling the accessor.
+
+
+
