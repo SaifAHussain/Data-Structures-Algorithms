@@ -33,3 +33,19 @@ value(qt)
 
 
 
+//Rotate 180 degrees anti-clockwise recursively
+
+
+rotate(qt) {
+    if (isValue(qt))
+        return qt
+    else
+        return makeQT(rotate(rl(qt)),
+                    rotate(ll(qt)),
+                    rotate(ru(qt)),
+                    rotate(lu(qt)))
+}
+
+
+
+
