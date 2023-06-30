@@ -39,3 +39,52 @@ reverseTree(t) {
 
 }
 
+//Inserting into a Binary Search Tree
+
+insert(v,BST) {
+
+    if (isEmpty(BST)) {
+        return MakeTree(v, EmptyTree, EmptyTree);
+    }
+
+    else if (v == root(BST)) {
+        return error;           //This is because we don't want to allow duplicates in the Tree
+    }
+
+    else if (v < root(BST)) {
+        insert(v,left(BST));
+    }
+
+    else if (v > root(BST)) {
+        insert(v,right(BST))
+    }
+}
+
+
+//Searching BST's recursively:
+
+isIn(v,BST) {
+    if (isEmpty(BST)) {
+        return false;
+    } else if (v == root(BST)) {
+        return true;
+    } else if (v < root(BST)) {
+        return isIn(v,left(BST));
+    } else {
+        return isIn(v,right(BST)); // We use else here because if its not equal or less than then it must be more than
+    }
+}
+
+//Searching BST's iteratively:
+isIn(value v , tree t) {
+    while ( (not isEmpty(t)) and (v != root(t)) )
+        if (v < root(t)){
+            t = left(t);
+        }
+        else {
+            t = right(t);
+        }
+     return (not isEmpty(t))
+}
+
+// This while loop would terminate for one of two reasons: either the final t is empty, so the value is not there and function returns false, or v=root(t) which means the value has been found and the function returns true
