@@ -1,0 +1,41 @@
+//Constructors:
+
+EmptyTree()
+//returns an empty tree
+
+MakeTree(value, left, right)
+// returns a new tree where the root has value v, left subtree l, right subtree r
+
+Leaf(v) = MakeTree(v, EmptyTree, EmptyTree)
+// This just makes a leaf by adding a node with no left or right subtrees (no children nodes)
+
+//Accessors:
+
+isEmpty(t)
+//returns true if t is the empty tree, otherwise returns false. 
+
+root(t)
+//returns the value of the root node of the tree t
+
+left(t)
+//returns the left subtree of the tree t
+
+right(t)
+//returns the right subtree of the tree t
+
+
+//Constructing a Tree recursively:
+MakeTree(33,Leaf (10),MakeTree(33,MakeTree (21, EmptyTree,Leaf(25)),Leaf(1)))
+
+
+//Reversing a Tree Recursively:
+reverseTree(t) {
+
+    if (isEmpty(t))
+        return t;
+    
+    else
+        return(MakeTree(root(t), reverseTree(right(t)), reverseTree(left(t))))
+
+}
+
