@@ -86,3 +86,18 @@ isIn(value v , tree t) {
 }
 
 // This while loop would terminate for one of two reasons: either the final t is empty, so the value is not there and function returns false, or v=root(t) which means the value has been found and the function returns true
+
+
+//Deleting from a BST recursively:
+
+delete(node, BST) {
+    if isIn(node, BST) {
+        if (isEmpty(left(node)) && isEmpty(right(node))) {
+            return EmptyTree();
+        }
+        if (isEmpty(left(node)) | isEmpty(right(node))) {
+            delete(node);
+        }
+
+    }
+}
