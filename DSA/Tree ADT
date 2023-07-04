@@ -41,24 +41,22 @@ reverseTree(t) {
 
 //Inserting into a Binary Search Tree
 
-insert(v,BST) {
-
+insert(v, BST) {
     if (isEmpty(BST)) {
-        return MakeTree(v, EmptyTree, EmptyTree);
+        return Leaf(v);
     }
-
     else if (v == root(BST)) {
-        return error;           //This is because we don't want to allow duplicates in the Tree
+        return "Error: Duplicate value";
     }
-
     else if (v < root(BST)) {
-        insert(v,left(BST));
+        left(BST) = insert(v, left(BST));
     }
-
     else if (v > root(BST)) {
-        insert(v,right(BST))
+        right(BST) = insert(v, right(BST));
     }
+    return BST;
 }
+
 
 
 //Searching BST's recursively:
