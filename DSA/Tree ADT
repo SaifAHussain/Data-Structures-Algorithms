@@ -90,14 +90,67 @@ isIn(value v , tree t) {
 
 //Deleting from a BST recursively:
 
-delete(node, BST) {
-    if isIn(node, BST) {
-        if (isEmpty(left(node)) && isEmpty(right(node))) {
-            return EmptyTree();
-        }
-        if (isEmpty(left(node)) | isEmpty(right(node))) {
-            delete(node);
-        }
+delete(value v, tree t) {
 
+    if (isEmpty(t)) {
+        error("item not in tree");
+    } else if (v < root(t)) {
+        return MakeTree(root(t), delete(v, left(t)), right(t));
+    } else if (v > root(t)) {
+        return MakeTree(root(t), left(t), delete(v,right(t)));
+    } else if (isEmpty(left(t))) { // At this point, we have identified the node that we want to delete
+        return right(t);
+    } else if (isEmpty(right(t))) {
+        return left(t);
+    } else {
+        return MakeTree(smallestNode(right(t)), left(t), removeSmallestNode(right(t)));
+    }
+}
+
+
+//Precondition: t is a non-empty BST
+smallestNode (tree t) {
+    if (isEmpty(left(t))) {
+        return root(t);
+    } else {
+        return smallestNode(left(t));
+    }
+}
+
+
+
+//Precondition: t is a non-empty BST
+removeSmallestNode(tree t) {
+    if (isEmpty(left(t))) { // That means current node is the smallest, so remove it
+        return right(t);
+    } else {
+        return MakeTree(root(t), removeSmallestNode(left(t)), right(t));
+    }
+}
+
+
+//Checking if a Binary Tree is a BST:
+
+isBST(tree t) {
+    if (isEmpty(t)) {
+        return true
+    } else {
+        return (allsmaller(left(t), root(t)) && isBST(left(t)) && allbigger(right(t),root(t)) && isBST(right(t)));
+    }
+}
+
+allsmaller(tree t, value v) {
+    if (isEmpty(t)) {
+        return true
+    } else {
+        return ((root(t) < v) && allsmaller(left(t),v) && allsmaller(right(t),v));
+    }
+}
+
+allbigger(tree t, value t) {
+    if (isEmpty(t)) {
+        return true;
+    } else {
+        return ((root(t) > t) && allbigger(left(t),v) && allbigger(right(t),v));
     }
 }
