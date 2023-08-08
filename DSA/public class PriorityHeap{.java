@@ -121,3 +121,41 @@ public void update(int i, int priority) {
     bubbleUp(i);
     bubbleDown(i);  //safe to do both cos if it's complete, won't ruin anything
 }
+
+
+public void heapify() {
+    for (int i = n/2; i > 0; i-- ) {
+        bubbleDown(i);
+    }
+}
+
+
+
+private void bubbleDown(int i) {
+    if (left(i) > n) {                                  //No Children
+        return
+    } 
+    
+    else if (right(i) > n) {                            //Only Left Child
+        if (heap[i] < heap[left(i)]) {
+            swap heap[i] and heap[left(i)];
+        }
+    }
+    
+    else if (heap[left(i)] > heap[right(i)]) {          //Left child has higher priority than right child
+        
+
+        if (heap[i] < heap[left(i)]) {
+            swap heap[i] and heap[left(i)];
+            bubbleDown(left(i));
+        }
+    }
+
+    else {                                              //Right child has higher priority than left
+
+        if (heap[i] < heap[right(i)]) {
+            swap heap[i] and heap[right(i)];
+            bubbleDown(right(i));
+        }
+    }
+}
