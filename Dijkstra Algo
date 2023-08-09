@@ -1,0 +1,84 @@
+dijkstra_with_matrix(int[][] G, int v, int z) {
+    n = G.length;
+    d = new int[n]; p = new int[n]; f = new bool[n];
+
+    for (int w = 0; w<n ; w++) {
+        d[w] = infty; p[w] = w; f[w] = false;
+    }
+
+    d[v] = 0 //Our starting node set to 0;
+
+    while (true) {
+        w = min_unfinished(d,f);
+        if (w == -1) {
+            break;
+        }
+
+        for(int u=0; u<n; u++) { //Iterating over the neighbours of w - since matrix, we go up to n
+            update(w,u,d,p);
+        }
+
+        f[w] = true;
+    }
+
+    return compute_result(v,z,G,d,p);
+}
+
+
+int min_unfinished(int[] d, bool[] f) {
+    int min = infty;
+    int idx = -1;
+
+    for (int i=0; i < d.length; i++) {
+        if((not f[i]) && (d[i] < min)) { //This is to find nodes that are UNFINISHED also have a distance less than the minimum found SO FAR - remember in our algorithm we want to find the unfinished node with smallest distance value.
+            idx = i;
+            min = d[i];
+        }
+    }
+
+    return idx;
+}
+
+void update(w,u,G,d,p) {
+    if (d[w] + G[w][u] < d[u]) {
+        d[u] = d[w] + G[w][u];
+        p[u] = w;
+    }
+}
+
+
+
+
+
+//The following will be Dijkstra's algortihm but implemented using Adjacency Lists instead of Adjacency Matrix:
+
+dijkstra_with_lists(List<Edge>[] N, int v, int z) {
+    n = G.length;
+    d = new int[n]; 
+    p = new int[n];
+    Q = new MinPriorityQueue();
+
+    for (int w = 0; w < n; w++) {
+        d[w] = infty;
+        p[w] = w;
+        Q.add(w, d[w]);
+    }
+
+    d[v] = 0;
+    Q.update(v,0);
+
+    while (Q.notEmpty()) {
+        w = Q.deleteMin();
+
+        for (Edge e: N[w]) {
+            u = e.target;
+            if (d[w] + e.weight < d[u]) {
+                d[u] = d[w] + e.weight;
+                p[u] = w;
+                Q.update(u, d[u]);
+            }
+        }
+    }
+
+    return compute_result(v,z,G,d,p);
+}
