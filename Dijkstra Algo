@@ -52,7 +52,16 @@ void update(w,u,G,d,p) {
 
 //The following will be Dijkstra's algortihm but implemented using Adjacency Lists instead of Adjacency Matrix:
 
-dijkstra_with_lists(List<Edge>[] N, int v, int z) {
+
+//This has the target node and the weight to get there.
+
+class Edge {
+    int target; 
+    int weight;
+}
+
+
+dijkstra_with_lists(List<Edge>[] N, int v, int z) { //N is the linked list with neighbours
     n = G.length;
     d = new int[n]; 
     p = new int[n];
@@ -60,7 +69,7 @@ dijkstra_with_lists(List<Edge>[] N, int v, int z) {
 
     for (int w = 0; w < n; w++) {
         d[w] = infty;
-        p[w] = w;
+        p[w] = w;         //We don't have an f[] array, because we inserting all our nodes into a queue. Only the ones IN the queue are unfinished. Finished arrays are removed from the priority queue. 
         Q.add(w, d[w]);
     }
 
@@ -70,15 +79,17 @@ dijkstra_with_lists(List<Edge>[] N, int v, int z) {
     while (Q.notEmpty()) {
         w = Q.deleteMin();
 
-        for (Edge e: N[w]) {
+        for (Edge e: N[w]) { // Iterate over edges to neighbours - linked list belonging to w
             u = e.target;
-            if (d[w] + e.weight < d[u]) {
+            if (d[w] + e.weight < d[u]) {  //should we update?
                 d[u] = d[w] + e.weight;
                 p[u] = w;
                 Q.update(u, d[u]);
             }
         }
     }
+
+    // 
 
     return compute_result(v,z,G,d,p);
 }
