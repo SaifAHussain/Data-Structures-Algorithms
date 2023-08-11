@@ -1,0 +1,33 @@
+//This will be an implementation of the Union-Find data structure which uses RANK as a way to indicate a tree's depth to help us know which tree should be the child of the root of the other one. 
+
+
+void makeSet(int v) {
+    parent[v] = v;
+    rank[v] = 0;
+}
+
+int find(int v) {
+    if (v == parent[v]) {
+        return v;
+    }
+
+    return parent[v] = find(parent[v]);
+}
+
+void union(int a, int b) {
+    a = find(a);
+    b = find(b);
+
+    if (a != b) {
+        if (rank(a) < rank(b)) {
+            swap(a,b);
+        }
+
+        parent[b] = a;
+
+        if (rank[a] == rank[b]) {
+            rank[a]++;
+        }
+    }
+}
+
